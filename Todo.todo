@@ -1,0 +1,10 @@
+# Initial tasks
+☐ Create a simple home page
+☐ Create database schema
+☐ Create a movie input form that stores to a database
+☐ Create a movie page that takes an ID from GET
+☐ Create a person input form that stores to a database
+☐ Create a person page that takes an ID from GET
+☐ Create a festival input page that stroes to a database
+☐ Create a festival page that takes an ID from GET
+☐ Integrate OAuth
