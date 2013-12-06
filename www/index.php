@@ -11,5 +11,9 @@
     <body>
         <h1>University Movie Database</h1>
         <script src="js/main.js"></script>
+
+        <?php
+        	echo "Thing";
+        ?>
     </body>
 </html>
