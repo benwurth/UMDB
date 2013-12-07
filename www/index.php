@@ -69,19 +69,23 @@
 
     $con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");
 
-    $movie_title = $_POST['movieID'];
+    $movie_title = pg_escape_string( $_POST['movieID'] );
 
     $query = "INSERT INTO movie_id VALUES(DEFAULT, '" . $movie_title . "')";
 
     if ($movie_title) {
         $result = pg_query($con, $query) or die ("Cannot execute query: $query\n");
 
-            if (!$result) {
+        if (!$result) {
             $errormessage = pg_last_error();
             echo "Error with query: " . $errormessage;
             exit();
         }
+        pg_close($con);
+        echo '<meta http-equiv="refresh" content="0">';
     }
 
-    pg_close($con);
+    
+
+
 ?>
