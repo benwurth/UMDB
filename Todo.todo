@@ -1,6 +1,14 @@
 # Initial tasks
-☐ Create a simple home page
+✔ Create a simple home page @done (13-12-05 12:40)
 ☐ Create database schema
+  ☐ Add description
+  ☐ Add watch links
+  ☐ Add running time
+  ☐ Add year
+  ☐ Add genre
+  ☐ Add poster url
+  ☐ Add class
+  ☐ Add awards
 ☐ Create a movie input form that stores to a database
 ☐ Create a movie page that takes an ID from GET
 ☐ Create a person input form that stores to a database
