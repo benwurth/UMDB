@@ -10,10 +10,12 @@
     </head>
     <body>
         <h1>University Movie Database</h1>
-        <script src="js/main.js"></script>
 
-        <?php
-        	echo "Thing";
-        ?>
+        <form name="add_movie" action="db_addMovie.php" method="post">
+            <input type="text" name="movieID" placeholder="Movie Name" />
+            <br />
+            <input type="submit" />
+            <br />
+        </form>
     </body>
 </html>
