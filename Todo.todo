@@ -1,7 +1,8 @@
 # Initial tasks
 ✔ Create a simple home page @done (13-12-05 12:40)
 ☐ Create database schema
-  ☐ Add description
+  ✔ Add description @done (13-12-08 02:12)
+    ✔ Make a condition to determine input validity @done (13-12-08 02:12)
   ☐ Add watch links
   ☐ Add running time
   ☐ Add year
