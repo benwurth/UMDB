@@ -3,7 +3,7 @@
 ☐ Create database schema
   ✔ Add description @done (13-12-08 02:12)
     ✔ Make a condition to determine input validity @done (13-12-08 02:12)
-  ☐ Add watch links
+  ✔ Add watch links @done (13-12-18 15:51)
     ✔ Add database table @done (13-12-18 12:43)
     ✘ Create parser class to get multiple links from a single text box (cancelled. only taking a single link now) @cancelled (13-12-18 15:50)
     ✔ Set up function to take inputs and add them to the db @done (13-12-18 15:51)
