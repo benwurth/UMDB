@@ -8,6 +8,9 @@
     ✘ Create parser class to get multiple links from a single text box (cancelled. only taking a single link now) @cancelled (13-12-18 15:50)
     ✔ Set up function to take inputs and add them to the db @done (13-12-18 15:51)
   ☐ Add running time
+    ☐ Create time formatting class
+      ✔ Write functionality for seconds to formatted time @done (14-01-18 14:39)
+      ☐ Write functionality for formatted time to seconds
   ☐ Add year
   ☐ Add genre
   ☐ Add poster url
