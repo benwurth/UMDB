@@ -16,13 +16,14 @@
 			$minutes = 0;
 			$hours = 0;
 
-			$hours = floor($seconds/60);
-			$seconds = $seconds%60;
+			$hours = floor($seconds/3600);
+			$seconds = $seconds%3600;
 
 			$minutes = floor($seconds/60);
 			$seconds = $seconds%60;
 
-			$output = $hours . ":" . $minutes . ":" . $seconds;
+			// $output = $hours . ":" . $minutes . ":" . $seconds;
+			$output = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 			return $output;
 		}
 
