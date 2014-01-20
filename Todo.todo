@@ -12,13 +12,17 @@
       ✔ Write functionality for seconds to formatted time @done (14-01-18 14:39)
       ☐ Write functionality for formatted time to seconds
   ☐ Add year
-  ☐ Add genre
+  ☐ Add genre (make sure that new genres can be added)
   ☐ Add poster url
   ☐ Add class
   ☐ Add awards
+☐ Create class for database usage
 ☐ Create a movie input form that stores to a database
   ☐ Validate input
     ☐ Validate links
+    ☐ Validate time entered
+    ☐ Validate year
+☐ Create class for validation
 ☐ Create a movie page that takes an ID from GET
 ☐ Create a person input form that stores to a database
   ☐ Validate input
