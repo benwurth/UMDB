@@ -4,15 +4,24 @@
 	*/
 	class Validate
 	{
+
+		const FORMATTED_TIME_REGEX = "/^\d{0,2}(:\d{0,2}){0,2}/";
 		
-		// function __construct(argument)
+		// public function __construct(argument) 
 		// {
-		// 	# code...
+			
 		// }
 
 		public function validateTime($time)
 		{
-			# code...
+			$v = preg_match("/\d{1,2}(:\d{0,2}){0,2}/", $time, $matches[]);
+
+			if ($v == 1) {
+				return $matches[0][0];
+			}
+			else {
+				return FALSE;
+			}
 		}
 	}
 

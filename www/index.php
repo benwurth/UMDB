@@ -18,7 +18,7 @@
             <br />
             <input type="text" name="movieLink" placeholder="Movie Link"/>
             <br />
-            <input type="text" name="runningTime" placeholder="Running Time in Seconds"/>
+            <input type="text" name="runningTime" placeholder="HH:MM:SS"/>
             <br />
             <input type="submit" />
         </form>
@@ -98,6 +98,10 @@
 </html>
 <?php
     // This code block takes input from the post form and submits it to the UMDB
+    
+    // include "lib/timeformatter.php";
+
+    // $tf = new TimeFormatter;
 
     $valid = false;
 
@@ -111,7 +115,9 @@
     $movie_title = pg_escape_string( $_POST['movieID'] );                   // get all movie information from the POST
     $movie_description = pg_escape_string( $_POST['movieDescription'] );    // all information is escaped using "pg_escape_string()"
     $movie_link = pg_escape_string( $_POST['movieLink'] );
-    $running_time = pg_escape_string( $_POST['runningTime'] );
+    $running_time = $tf->timeToSec(pg_escape_string( $_POST['runningTime'] ));
+
+    error_log($running_time);
 
     if ($movie_title and $movie_description and $movie_link and $running_time) {              // checks to see if all information is valid 
         $valid = true;                                                      // (TODO: put all validity information into 

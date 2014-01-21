@@ -1,4 +1,7 @@
 <?php 
+	
+	include "validate.php";
+
 	/**
 	* TimeFormatter deals with formatting a number of seconds to and from regular time notation
 	*/
@@ -32,8 +35,37 @@
 
 		public function timeToSec($time)
 		{
-			# Takes a string with a formatted time value and returns the number 
-			# of seconds as an integer
+			# Takes a formatted time and returns the total number of seconds as 
+			# an integer.
+			$tv = new Validate;
+
+			$time = $tv->validateTime($time);
+
+			if ($time)
+			{
+				$hms = explode(":", $time);
+
+				if (count($hms) == 1)
+				{
+					return $hms[0];
+				} 
+				else if (count($hms) == 2)
+				{
+					return $hms[0] * 60 + $hms[1];
+				}
+				else if (count($hms) == 3)
+				{
+					return $hms[0] * 3600 + $hms[1] * 60 + $hms[2];
+				}
+				else
+				{
+					return FALSE;
+				}
+			}
+			else
+			{
+				return FALSE;
+			}
 		}
 	}
  ?>
