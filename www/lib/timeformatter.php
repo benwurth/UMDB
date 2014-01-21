@@ -12,6 +12,9 @@
 
 		public function secToTime($seconds)
 		{
+			# Takes an integer representing a number of seconds and returns a 
+			# string with the format HH:MM:SS
+			
 			$timeString = "";
 			$minutes = 0;
 			$hours = 0;
