@@ -35,9 +35,6 @@
             // $secrets = new Secrets;
             $dbt = new DBTools;
 
-            // connect to the database and store the connection
-            // $con = $dbt->connect();
-
             $result = $dbt->homepageQuery();
             $numrows = pg_num_rows($result);    // gets the number of rows (its "length") from the result
             
