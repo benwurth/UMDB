@@ -4,3 +4,5 @@ www/php.log
 umdb.sublime-project
 
 umdb.sublime-workspace
+
+www/lib/secrets.php

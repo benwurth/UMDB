@@ -27,11 +27,15 @@
 
             // This bit of PHP gets all the database entries 
             // for all movies stored in the UMDB.
+            
+            include "lib/secrets.php";
 
-            $host = "localhost";                // storing database information
-            $user = "feanor93";
-            $db = "UMDB";
-            $pass = "connolly";
+            $secrets = new Secrets;
+
+            $host = $secrets->getDatabaseHost();                // storing database information
+            $user = $secrets->getDatabaseUser();
+            $db = $secrets->getDatabaseName();
+            $pass = $secrets->getDatabasePassword();
 
             // connect to the database and store the connection
             $con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");
