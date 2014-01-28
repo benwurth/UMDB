@@ -28,17 +28,15 @@
             // This bit of PHP gets all the database entries 
             // for all movies stored in the UMDB.
             
-            include "lib/secrets.php";
+            // include_once "lib/secrets.php";
+            include_once "lib/timeformatter.php";
+            include_once "lib/dbTool.php";
 
-            $secrets = new Secrets;
-
-            $host = $secrets->getDatabaseHost();                // storing database information
-            $user = $secrets->getDatabaseUser();
-            $db = $secrets->getDatabaseName();
-            $pass = $secrets->getDatabasePassword();
+            // $secrets = new Secrets;
+            $dbt = new DBTools;
 
             // connect to the database and store the connection
-            $con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");
+            $con = $dbt->connect();
 
             // Create the query string to retrieve all the information for all movies.
             // Uses an inner join to get all the relevant information for each movie 
@@ -72,8 +70,6 @@
 
         <?php
 
-            include "lib/timeformatter.php";
-
             $tf = new TimeFormatter;
 
             // This PHP fills the table that was created above with information 
@@ -102,19 +98,8 @@
 </html>
 <?php
     // This code block takes input from the post form and submits it to the UMDB
-    
-    // include "lib/timeformatter.php";
-
-    // $tf = new TimeFormatter;
 
     $valid = false;
-
-    $host = "localhost";                        // store the database information
-    $user = "feanor93";                         // (TODO: delete this instance of this 
-    $db = "UMDB";                               // information because it already 
-    $pass = "connolly";                         // exists in a previous PHP block)
-
-    $con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");  // connect to the server or die
 
     $movie_title = pg_escape_string( $_POST['movieID'] );                   // get all movie information from the POST
     $movie_description = pg_escape_string( $_POST['movieDescription'] );    // all information is escaped using "pg_escape_string()"

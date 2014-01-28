@@ -31,3 +31,4 @@
   ☐ Validate input
 ☐ Create a festival page that takes an ID from GET
 ☐ Integrate OAuth
+☐ Document according to phpdoc standards and create documentation
