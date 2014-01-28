@@ -31,6 +31,7 @@
             // include_once "lib/secrets.php";
             include_once "lib/timeformatter.php";
             include_once "lib/dbTool.php";
+            include_once "lib/movie.php";
 
             // $secrets = new Secrets;
             $dbt = new DBTools;
@@ -71,8 +72,6 @@
             
 
             echo "</ul>";
-
-            pg_close($con);                     // closes the connection
         ?>
 
         </table>
@@ -83,45 +82,27 @@
 
     $valid = false;
 
-    $movie_title = pg_escape_string( $_POST['movieID'] );                   // get all movie information from the POST
-    $movie_description = pg_escape_string( $_POST['movieDescription'] );    // all information is escaped using "pg_escape_string()"
-    $movie_link = pg_escape_string( $_POST['movieLink'] );
-    $running_time = $tf->timeToSec(pg_escape_string( $_POST['runningTime'] ));
+    $movie_title = null;
+    $movie_description = null;
+    $movie_link = null;
+    $running_time = null;
 
-    error_log($running_time);
+    if (isset( $_POST['movieID'] ) ) {$movie_title = pg_escape_string( $_POST['movieID'] );}                            // get all movie information from the POST    
+    if (isset( $_POST['movieDescription'] ) ) {$movie_description = pg_escape_string( $_POST['movieDescription'] );}    // all information is escaped using "pg_escape_string()"
+    if (isset( $_POST['movieLink'] ) ) {$movie_link = pg_escape_string( $_POST['movieLink'] );}
+    if (isset( $_POST['runningTime'] ) ) {$running_time = $tf->timeToSec(pg_escape_string( $_POST['runningTime'] ));}
 
-    if ($movie_title and $movie_description and $movie_link and $running_time) {              // checks to see if all information is valid 
-        $valid = true;                                                      // (TODO: put all validity information into 
-    }                                                                       // another class)
+    if ($movie_title and $movie_description and $movie_link and $running_time) {                // checks to see if all information is valid 
+        
+        $valid = true;                                                                          // (TODO: put all validity information into 
+                                                                                                // another class)
+        $curMovie = new Movie($movie_title, $movie_description, $movie_link, $running_time);
+    }
 
     if ($valid) {
-        $query = "INSERT INTO movie_id VALUES(DEFAULT, '" . $movie_title . "');";   // creates initial query to insert the movie title into the table: 
-                                                                                    // "movie_id"
-        $result = pg_query($con, $query) or die ("Cannot execute query: $query\n"); // stores the result of the query or dies
-
-        if (!$result) {                                 // If there's no result,
-            $errormessage = pg_last_error();            // get the error message,
-            echo "Error with query: " . $errormessage;  // echo it,
-            exit();                                     // then exit program
-        }
-
-        // This next block of code simply constructs the pgsql query one line at a time 
-        // by adding them together while keeping them separated with semicolons
-        $query = "INSERT INTO description VALUES( DEFAULT, '" . $movie_description . "', currval('movie_id_movie_id_seq'::regclass) );";
-        $query .= "INSERT INTO watch_links VALUES( DEFAULT, '" . $movie_link . "', currval('movie_id_movie_id_seq'::regclass) );";
-        $query .= "INSERT INTO running_time VALUES( DEFAULT, '" . $running_time . "', currval('movie_id_movie_id_seq'::regclass) );";
-        $result = pg_send_query($con, $query) or die ("Cannot execute query: $query\n");
-        error_log("Initiated query: \"$query\"\nThe result was: \"$result\"", 3, "php.log");    // Logs the query for debugging 
-                                                                                                // (can be removed in deployment version)
-
-        if (!$result) {                                 // Checks to make sure the result was good
-            $errormessage = pg_last_error();            // otherwise, it throws an error and exits
-            echo "Error with query: " . $errormessage;
-            exit();
-        }
-
-        pg_close($con);                                 // Closes the connection
         
+        $dbt->submitMovie($curMovie);
+
         echo '<meta http-equiv="refresh" content="0">'; // Refreshes the page to show 
                                                         // updated table that includes 
                                                         // all the information just submitted
