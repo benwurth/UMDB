@@ -40,5 +40,27 @@ class DBTools
 		$con = pg_connect("host=$host dbname=$db user=$user password=$pass") or die ("Could not connect to server\n");
 		return $con;
 	}
+
+	public function queryDB($con, $query)
+	{
+		// quits if something goes wrong
+		$result = pg_query($con, $query) or die ("Cannot execute query: $query\n");
+		return $result;
+	}
+
+	public function homepageQuery()
+	{
+		$con = $this->connect();
+		$query = "SELECT * FROM movie_id 
+            INNER JOIN description 
+                ON (movie_id.movie_id = description.description_movie_id) 
+            INNER JOIN watch_links
+                ON (movie_id.movie_id = watch_links.fk_movie_id) 
+            INNER JOIN running_time
+                ON (movie_id.movie_id = running_time.fk_movie_id)
+            ORDER BY movie_id ASC;";
+        $result = $this->queryDB($con, $query);
+        return $result;
+	}
 }
  ?>

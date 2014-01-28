@@ -36,24 +36,9 @@
             $dbt = new DBTools;
 
             // connect to the database and store the connection
-            $con = $dbt->connect();
+            // $con = $dbt->connect();
 
-            // Create the query string to retrieve all the information for all movies.
-            // Uses an inner join to get all the relevant information for each movie 
-            // from the individual tables
-            $query = "SELECT * FROM movie_id 
-            INNER JOIN description 
-                ON (movie_id.movie_id = description.description_movie_id) 
-            INNER JOIN watch_links
-                ON (movie_id.movie_id = watch_links.fk_movie_id) 
-            INNER JOIN running_time
-                ON (movie_id.movie_id = running_time.fk_movie_id)
-            ORDER BY movie_id ASC;";
-
-            // stores the result in "result" if possible
-            // quits if something goes wrong
-            $result = pg_query($con, $query) or die ("Cannot execute query: $query\n"); 
-
+            $result = $dbt->homepageQuery();
             $numrows = pg_num_rows($result);    // gets the number of rows (its "length") from the result
             
         ?>
