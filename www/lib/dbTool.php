@@ -75,7 +75,7 @@ class DBTools
 		$query = "INSERT INTO movie_id VALUES(DEFAULT, '" . $movie_title . "'); SELECT currval('movie_id_movie_id_seq'::regclass);";
 		$result = $this->queryDB($con, $query);
 
-		        if (!$result) {                                 // If there's no result,
+		if (!$result) {                                 // If there's no result,
             $errormessage = pg_last_error();            // get the error message,
             echo "Error with query: " . $errormessage;  // echo it,
             exit();                                     // then exit program
