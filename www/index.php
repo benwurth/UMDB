@@ -51,6 +51,7 @@
             <th>Description</th>
             <th>Watch Link</th>
             <th>Running Time</th>
+            <th>Year</th>
         </tr>
 
         <?php
@@ -61,14 +62,16 @@
             // gathered in the previous block
             
             for ($i=0; $i < $numrows; $i++) {                   // numrows is the length of the query result
-                $row = pg_fetch_array($result, $i);             // turns the current row into an array
+                $row = pg_fetch_array($result, $i);
+                // echo "<pre>", print_r($row), "</pre>";             // turns the current row into an array
                 echo "<tr>";
-                echo "<td>", $row["movie_id"], "</td>";         // echos the html to put movie_id into the table
+                echo "<td>", $row[0], "</td>";         // echos the html to put movie_id into the table
                 echo "<td>", $row["movie_title"], "</td>";      // same for all the other pieces of information
                 echo "<td>", $row["description_id"], "</td>";
                 echo "<td>", $row["description"], "</td>";
                 echo "<td>", $row["watch_link"], "</td>";
                 echo "<td>", $tf->secToTime($row["running_time"]), "</td>";
+                echo "<td>", $row["year"], "</td>";
                 echo "</tr>";
             }
             
