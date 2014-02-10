@@ -78,7 +78,7 @@ class Year
 	public function addMovieYear($year)
 	{
 		$dbt = new DBTools;
-		$query = "INSERT INTO year_table VALUES(DEFAULT, " . $year . "); SELECT curval('year_table_year_id_seq'::regclass);";
+		$query = "INSERT INTO year_table VALUES(DEFAULT, " . $year . "); SELECT currval('year_table_year_id_seq'::regclass);";
 		$con = $dbt->connect();
 		$result = $dbt->queryDB($con, $query);
 		if (!$result) {                                 // If there's no result,
