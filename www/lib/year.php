@@ -20,6 +20,12 @@ class Year
 		$this->year_id = $y_id;
 	}
 
+	/**
+	 * Queries year_table to see if there's already an entry for the year. If there is,
+	 * it returns the year_id. If there isn't, it returns -1.
+	 * @param  integer $year Year to check
+	 * @return integer       Returns year_id if exists, otherwise, -1.
+	 */
 	public function checkIfYearExists($year)
 	{
 		if (!$year)
@@ -35,7 +41,7 @@ class Year
 
 		if (!pg_num_rows($result))
 		{
-			return false;
+			return -1;
 		}
 		else
 		{
@@ -52,21 +58,31 @@ class Year
 	 * creates one and then creates a relationship with year_rel_table.
 	 * @param  integer $movie_id the movie_id from the movie object (or the year object)
 	 * @param  integer $year     The year from the movie object
-	 * @param  integer $year_id  the year_id from the movie object. For creating relational
-	 *                           tables
-	 * @return Boolean           Returns True if the query was successful. Returns False if
+	 * 
+	 * @return integer           Returns year_id if the query was successful. Returns -1 if
 	 *                           unsuccessful.
 	 */
-	public function insertMovieYearRel($movie_id, $year, $year_id)
+	public function insertMovieYearRel($movie_id, $year)
 	{
-		if (!($movie_id and $year and $year_id)) {
+		$year_id = null;
+
+		if (!($movie_id and $year)) {
 			error_log("insertMovieYearRel is missing parameter(s).");
 			return -1;
 		}
 
-		if ($this->checkIfYearExists($year)) {
+		$year_id = $this->checkIfYearExists($year);
+
+		if ($year_id == -1) {
 			$year_id = $this->addMovieYear($year);
 		}
+
+		$dbt = new DBTools();
+		$query = "INSERT INTO year_rel_table VALUES(DEFAULT, " . $year_id . ", " . $movie_id . ");";
+		$con = $dbt->connect();
+		$result = $dbt->queryDB($con, $query);
+		// error_log("year_rel_table query: " . $result);
+		return $result;
 	}
 
 	/**

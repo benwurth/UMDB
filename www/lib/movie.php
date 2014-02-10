@@ -22,6 +22,7 @@ class Movie
 		$this->description = $description;
 		$this->watch_links = $watch_links;
 		$this->running_time = $running_time;
+		$this->year = $year;
 	}
 
 	public function getTitle()
@@ -46,6 +47,12 @@ class Movie
 	{
 		$rt = $this->running_time;
 		return $rt;
+	}
+
+	public function getYear()
+	{
+		$y = $this->year;
+		return $y;
 	}
 
 }

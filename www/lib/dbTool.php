@@ -1,6 +1,7 @@
 <?php 
 
 include "secrets.php";
+include_once "year.php";
 
 /**
 * dbTool is a class for handling most of the processes that require access to the
@@ -67,10 +68,15 @@ class DBTools
 	public function submitMovie($movie)
 	{
 		$con = $this->connect();
+
+		$y = new Year();
+
 		$movie_title = $movie->getTitle();
 		$description = $movie->getDescription();
 		$watch_links = $movie->getWatchLinks();
 		$running_time = $movie->getRunningTime();
+		$movie_year = $movie->getYear();
+		error_log("movie_year: " . $movie_year);
 
 		$query = "INSERT INTO movie_id VALUES(DEFAULT, '" . $movie_title . "'); SELECT currval('movie_id_movie_id_seq'::regclass);";
 		$result = $this->queryDB($con, $query);
@@ -96,6 +102,16 @@ class DBTools
 
 		if ($running_time) {
 			$query .= "INSERT INTO running_time VALUES( DEFAULT, '" . $running_time . "', " . $movie_id ." );";
+		}
+
+		if ($movie_year) {
+			$yearResult = $y->insertMovieYearRel($movie_id, $movie_year);
+
+			if (!$yearResult) {                                 // Checks to make sure the result was good
+	            $errormessage = pg_last_error();            // otherwise, it throws an error and exits
+	            echo "Error with query: " . $errormessage;
+	            exit();
+	        }
 		}
 
 		error_log("Initiated query: \"$query\"\nThe result was: \"$result\"", 3, "php.log");    // Logs the query for debugging 
