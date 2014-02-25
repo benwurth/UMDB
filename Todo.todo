@@ -13,16 +13,22 @@
       ✔ Write functionality for formatted time to seconds @done (14-01-20 20:28)
   ✔ Add year @done (14-02-09 18:21)
   ☐ Add genre (make sure that new genres can be added)
+    ☐ Create a genre class
+      ☐ Give the genre class a function to check if a genre already has an entry
+      ☐ Give genre class a function to add a genre entry
+      ☐ Give genre class a function to remove a genre entry
   ☐ Add poster url
   ☐ Add class
   ☐ Add awards
-☐ Create class for database usage
+✔ Create class for database usage @done (14-02-24 18:46)
 ☐ Create a movie input form that stores to a database
   ☐ Validate input
     ☐ Validate links
     ☐ Validate time entered
     ☐ Validate year
 ☐ Create class for validation
+☐ Create an admin page
+  ☐ Create a section for adding and removing entries from the genres table
 ☐ Create a movie page that takes an ID from GET
 ☐ Create a person input form that stores to a database
   ☐ Validate input
